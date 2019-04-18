@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tx_user_hint"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        android:textColorHint="@color/colorPrimaryDark"
+        >
+
+        <EditText
+            android:id="@+id/ed_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tx_password_hint"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        android:textColorHint="@color/colorPrimaryDark"
+        >
+
+        <EditText
+            android:id="@+id/ed_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/login"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimaryDark"
+        />
+    <ProgressBar
+        android:id="@+id/login_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        />
+</LinearLayout>
