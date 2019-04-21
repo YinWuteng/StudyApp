@@ -1,18 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/main_study"
+        android:textSize="25sp" />
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            >
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_gravity="center_horizontal"
+                   >
+                   <Button
+                       android:id="@+id/btn_java"
+                       style="?android:attr/buttonBarButtonStyle"
+                       android:layout_width="150dp"
+                       android:layout_height="150dp"
+                       android:text="@string/main_java"
+                       android:textSize="20sp"
+                       android:background="@drawable/bg_main_btn"
+                       />
+
+                   <Button
+                       android:id="@+id/btn_android"
+                       style="?android:attr/buttonBarButtonStyle"
+                       android:layout_width="150dp"
+                       android:layout_height="150dp"
+                       android:layout_marginStart="5dp"
+                       android:background="@drawable/bg_main_btn"
+                       android:text="@string/main_android"
+                       android:textSize="20sp" />
+               </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                >
+
+                <Button
+                    android:id="@+id/btn_kotlin"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/bg_main_btn"
+                    android:text="@string/main_kotlin"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btn_arithmetic"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/bg_main_btn"
+                    android:text="@string/main_arithemic"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_other"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_main_btn"
+                android:text="@string/main_other"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

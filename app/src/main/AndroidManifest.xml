@@ -4,18 +4,16 @@
     package="com.study">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_study"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".MyApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,9 +23,23 @@
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            />
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".android.AndroidActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".algorithm.AlgorithmActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".java.JavaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".kotlin.KotlinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".other.OtherActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
