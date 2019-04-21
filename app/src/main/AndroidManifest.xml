@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.study">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -40,6 +41,7 @@
         <activity
             android:name=".other.OtherActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".algorithm.AlgorithmWebActivity" />
     </application>
 
 </manifest>

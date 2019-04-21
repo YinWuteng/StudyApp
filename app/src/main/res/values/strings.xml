@@ -11,4 +11,6 @@
     <string name="main_kotlin">Kotlin</string>
     <string name="main_arithemic">算法</string>
     <string name="main_other">其他</string>
+
+    <string name="algorithm_tab">常用算法实例</string>
 </resources>
