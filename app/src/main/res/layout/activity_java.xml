@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Java基础知识"
-    android:layout_centerInParent="true"
-    />
-</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/tv_java"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_margin="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:text="Java基础学习"
+            android:textSize="@dimen/sp_20"
+             />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_margin="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:text="Java深入源码"
+            android:textSize="@dimen/sp_20"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_margin="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:text="数据结构"
+            android:textSize="@dimen/sp_20"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_margin="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:text="多线程、线程池"
+            android:textSize="@dimen/sp_20"
+            />
+    </LinearLayout>
+</ScrollView>
