@@ -59,7 +59,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         TextInputLayout tx_password_hin = findViewById(R.id.tx_password_hint);
         ed_user = findViewById(R.id.ed_user);
         ed_password = findViewById(R.id.ed_password);
-
+        ed_user.setText("YinWuTeng");
+        ed_password.setText("ywt@19930409");
 
         getUserInfo();
         tx_user_hint.setHint(getResources().getString(R.string.user));
@@ -103,7 +104,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             saveData(user, password);
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
         } else {
             ToastUtils.showToast(LoginActivity.this, getResources().getString(R.string.user_or_password_error));
         }

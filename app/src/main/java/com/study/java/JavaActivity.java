@@ -38,22 +38,22 @@ public class JavaActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.btn_java_base: //java基础
                 intent.setClass(this, AlgorithmWebActivity.class);
-                intent.putExtra("url","https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/java_base");
+                intent.putExtra("url","https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/java/java_base");
                 startActivity(intent);
                 break;
             case R.id.btn_deep_source: //java深入源码
                 intent.setClass(this, AlgorithmWebActivity.class);
-                intent.putExtra("url","https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/java_depe_source");
+                intent.putExtra("url","https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/java/java_depe_source");
                 startActivity(intent);
                 break;
             case R.id.btn_data_structe: //java数据结构
                 intent.setClass(this, AlgorithmWebActivity.class);
-                intent.putExtra("url","https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/data_structure");
+                intent.putExtra("url","https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/java/data_structure");
                 startActivity(intent);
                 break;
             case R.id.btn_thread_pool: //java线程
                 intent.setClass(this, AlgorithmWebActivity.class);
-                intent.putExtra("url","https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/thread_pool");
+                intent.putExtra("url","https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/java/thread_pool");
                 startActivity(intent);
                 break;
             default:
