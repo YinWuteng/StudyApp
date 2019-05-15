@@ -30,4 +30,14 @@
         android:text="Android其他知识"
         android:textSize="@dimen/sp_20"
         />
+    <Button
+        android:id="@+id/btn_android_jvm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_margin="@dimen/dp_5"
+        android:layout_below="@+id/btn_android_code_source"
+        android:gravity="center_vertical"
+        android:text="Android JVM相关"
+        android:textSize="@dimen/sp_20"
+        />
 </RelativeLayout>
