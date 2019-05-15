@@ -1,0 +1,103 @@
+1.Android各个版本API的区别
+  5.0
+   1.MD布局
+   2.添加通知栏浮动通知
+   3.添加更多类型的传感器
+ 6.0
+   1.动态权限
+   2.Doze电量管理功能
+   3.指纹识别
+ 7.0
+   1.分屏
+   2.Doze电量管理优化
+   3.更便捷的通知栏，自动将多条通知合并，
+ 8.0
+   1.安装未知来源的第三方开关被移除，
+   2.通知功能改变
+   3.画中画功能的加入
+ Android P
+   1.支持是室内高精度定位
+   2.对多摄像头开发支持
+   3.加大对kotlin的支持
+2.invalidate和postInvalidate,requestLayout的区别及使用
+  这两个都是刷新View的API，它们的主要区别是invalidate可以在主线程中调用，而不能在子线程中调用，若在子线程中进行刷新view的操作需要配合handler来使用，
+  而postInvalidate可以在子线程中直接调用。它的底层也是用handler来实现的。
+  Invalidate会执行onDraw方法，假使什么都没有发生改变，它也会重绘，
+  requestLayout会执行onMeasure和onLayout方法
+  所以在视图更新时：视图大小、位置发生改变，而视图内容不变，调用requestLayout，
+  视图大小、位置不变，而视图内容有变化时，调用invalidate，执行onDraw，
+  视图大小或位置、内容均发生改变时，需要同时用requestLayout和invalidate.
+3.Activity-Window-View三者的差别
+  Activity通过Window来实现视图元素的展示，window可以理解为一个容器，盛放这一个个的view，
+  用来执行具体的展示工作。
+
+4.谈谈对Volley的理解
+  优点：非常适合进行数据量不大，但通信频繁的网络操作，内部封装异步线程，支持get,post网络请求，
+  内部封装了简单的图片下载，可直接在主线程调用服务端并处理返回结果，可以取消请求容易扩展，面向接口编程。支持HttpClient和HttpUrlConnection。
+  缺点：对大文件下载表现很糟糕，只支持http请求。图片加载性能一般。
+5.如何优化自定义View
+  1.降低刷新频率
+  2.使用硬件加速
+6.低版本SDK如何实现高版本api
+  @TargetAPI标注实现在低版本SDK中使用高版本API
+7.描述一次网络请求的流程
+  1.分析域名
+  2.TCP三次握手
+  3.建立TCP连接
+  4.客户端发起HTTP请求
+  5.服务器响应请求
+  6.客户端展示数据
+8.HttpUrlConnection 和 okhttp关系
+  HttpUrlConnection的底层实现是okhttp
+9.Bitmap对象的理解
+  Bitmap是Android系统中的图像处理中的最重要的类之一，Bitmap可以获取图像文本信息，对图像进行旋转，缩放，剪切，压缩等操作，并可以以指定格式保存图像文件。
+10.Handler,Message,MessageQuene,Looper定义及理解。
+  Handler发送的Message会发送到MessageQueue中；
+   Looper.loop方法不断读取MessageQueue中的消息，并将消息分发给对应的Handler，handler再处理消息；
+   MessageQueue为消息队列，由Looper管理.
+11.ActivityThread，AMS，WMS的工作原理
+   Activity只负责生命周期和事件处理，window只控制视图，一个Activity包含一个window，如果activity没有window，就相当于service。
+   AMS统一调度所有应用程序的activity，wms控制所有windos的显示与隐藏以及要显示的位置。
+12.View绘制机制
+   OnMeasure测量视图，onLayout确定View位置进行布局，onDraw负责绘制布局。
+   Invalidata和postInvalidate区别：
+   如果当前视图是可见的，onDraw会在未来的某个时刻调用，这个方法必须在UI主线程中调用，此时用invalidate，如果不是在主线程需要调用postInvalidate。
+13.事件分发机制
+   本质：将点击事件向某个View进行传递并最终得到处理。
+   主要方法：diapatchTounchEvent(),分发点击事件；onInterceptTounchEvent()，判断是否拦截了某个事件；onTouchEvent()，处理点击事件。
+   事件分发顺序：Activity(Window)-ViewGroup-View
+   首先 ViewGroup获取到事件，调用dispatchTouchEvent，如果View的onInterceptTouchEvent返回true就表示要拦截当前事件，接着就会调用该ViewGroup的onTouchEvent方法，若返回false,则会传递给子view，继续执行dispatchTouchEvent方法，以此反复。
+14.AsyncTask如何使用
+   1.Execute执行一个异步任务，触发异步任务的执行，
+   2.onPreExecute，在execute调用后立即执行,一般在执行前台任务ui签做一些标记
+   3.doInBackGround，用来做一些耗时操作
+   4.onProgressUpdate，将进度信息更新在ui组件上.
+   5.onPostExecute,当后台操作结束后，这个方法将会被调用，计算结果将作为参数传递到此方法中，直到将结果显示在ui上。
+15.SpareArray 原理 及其 和HashMap的性能比较
+   1.SpareArray也是通过键值对存储数据，只是key为整形int，而HashMap的key为Interger，更省空间
+   2.SpareArray意为稀松数组，其结构类似于数组结构，依次排开，HashMap是散列列表，根据hash值来存储，因此更省空间
+   3.从查找效率和插入效率来看，如果是正序插入，SpareArray的插入效率会高于HashMap。如果是逆序,则相反。
+   4.SpareArray在逆序插入效率很低，是因为每次插入都会采用二分查找来定位
+   5.从查找速度来考虑，HashMap的查找速度会高于SparseArray
+   6.SpareArray相对于HashMap的最大优势在内存空间
+16.ContentProvider 是如何实现数据共享的？
+   ContentProvider是以Uri的形式对外提供数据，ContentResolver是根据Uri来反问数据。
+   步骤：定义ContentProvider类，该类需要继承Android系统提供的ContentProvider基类。
+   在Mainfest.xml中注册
+   其它程序使用ContentProvider来操作。
+17.IntentService使用、原理
+   IntentService继承了Service.，在intentService内有一个工作线程来处理耗时操作。intentService封装了handlerThread和handler。
+   IntentService相比于线程，有比较高的优先级，在内存回收时不易被轻易结束。
+18.说说Activity、Intent、Service 是什么关系
+  一个Activity通常是一个单独的屏幕，每一个Activity都被实现为一个单独的类，这些类都是从基类中继承而来的，
+  Activity类会显示由视图控件组成的用户接口，并对视图控件的事件做出响应。
+  Intent的调用时用来进行屏幕之间的切换，intent描述应用想要做什么，
+  Service是运行在后台的代码，不能与用户交互，可以运行在自己的进程里，也可以运行在其它应用进程的上下文里，
+  Activity跳转Activity，Activity启动Service，Service打开Activity都需要intent表明意图，以及传递参数，intent是这些组件间信号传递的承载者。
+19.SP是进程同步的吗?有什么方法做到同步？
+   SP不支持进程同步。可以使用ContentProvider来实现SP的进程同步。ContentProvider基于Binder，不存在进程间互斥问题，
+   对于同步也做也很好的封装处理。另外ContentProvider的每次操作都会重新getSP，保证SP的一致性。
+20.AndroidManifest的作用与理解
+   <manifest/>标签层：用来做一些最基本的声明，如包名，权限，资源命名空间等。
+   <application/>标签层：用来配置apk的整体属性，可以统一指定所有界面的主题。
+   <具体组件/>标签层：</provider>、</service>、</activity>，额外扩展一些关于activity的属性：

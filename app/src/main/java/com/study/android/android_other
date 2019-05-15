@@ -1,0 +1,199 @@
+1.Binder
+  进程间通讯实现方式之一。
+  常用的IPC通信方式，使用Bundle,使用文件共享，使用Message(串行处理事务),使用AIDL，使用ContentProvider,使用Socket。
+  可开行、传输性能高、安全性
+2.AsyncTask原理及不足？如何取消AsyncTask？
+  AsyncTask是对Handler与线程池的封装，使用它的方便之处在与能够更新用户界面。
+  缺点：
+  1.当线程池已经有128个线程时，缓冲队列已满，此时向线程提交任务，或导致应用FC。
+  2.AsyncTask不会随着Activity的销毁而销毁，直到doInBackGround方法执行完毕，在Activity销毁之前，没有取消Asytask，这有可能让AsyncTask奔溃。
+  3.如果Activity 已经被销毁。AsyncTask的后台线程还在执行，会导致Activity无法回收，引起内存泄漏。
+  4.屏幕旋转后，Activity会重建，导致AsyncTask持有的Activity引用无效，此时界面不会更新
+  在AsyncTask中，我们没有办法直接停止掉异步任务，只能通过新增cancel方法来传递信号量，在doInBackGround中检测当前状态，当是cancel状态时，立刻跳出该方法。
+3.oom是什么？什么情况导致oom？有什么方法可以避免oom，oom是否可以try catch,为什么？
+  Oom即内存溢出，
+  原因:
+  1.Activity没有对栈进行管理，如果开启过多，就容易造成内存溢出
+  2.加载大的图片会和同时数量过多的图片的时候
+  3.数据库会资源没有关闭
+  4.静态成员持有类的引用
+  5.单例引起内存泄漏
+  6.handler造成内存泄漏
+  7.无限循环的属性动画易引起内存泄漏
+  8.listView等没有getView方法没有复用
+  9.递归次数过多也会导致内存溢出
+  解决oom方法
+  1.使用缓存技术LruCache,DiskLruCache，对象重复并且频繁调用可以考虑对象池。
+  2.对于引用生命周期不一样的对象，可以用软饮用或弱引用。
+  3.对于资源对象，使用finally强制关闭
+  4.对于不再使用的资源需要尽快释放，
+  5.尽量少用static方法和static成员，
+  6.对于bitmap应该手动调用recycle方法进行回收。
+  一般情况下oom是不能try catch的，特例：在try中声明了很大的对象，也会导致oom，此时可以catch到。
+4.LruCache（内存缓存）默认缓存大小
+  默认缓存大小为当前进程的1/8
+
+5.MVC、MVP、MVVM简介及对比
+  MVC :
+  View:xml布局
+  Model:数据层、负责数据交互、存储和实体类定义
+  Controller:业务处理层
+  Activity充当了View和Controller层，直接导致Activity代码臃肿、混乱。
+  MVP:
+  View:xml文件及对应的Activity和Fragment，负责界面展示和交互
+  Model：数据层、负责数据交互、存储和实体类定义
+  Presenter:负责View和Model之间的逻辑处理
+  核心理念：通过一个抽象的view接口，将presenter与真正的view层进行解耦，Presneter持有该View接口，对该接口进行操作。而不是直接操作View层，这样可以吧视图操作和业务逻辑解耦，从而将Activity成为真正的View层。
+  不足：MVP模式中定义了大量的接口，使得代码结构变大和复杂，MVP是UI和事件驱动，需要手动调用大量的方法来进行实现，缺乏自动性。
+  MVVM：
+  View层负责和UI相关的操作，不进行业务处理，更新UI通过数据绑定实现，尽量在ViewModel里面做。View层可以通过数据来驱动更改UI，UI事件通过Command来绑定（DataBinding），
+  优点：数据驱动、低耦合、主线程更新ui、可复用性、方便单元测试。
+
+6.EventBus
+  是一款针对Android优化的发布/订阅事件总线，主要功能是替代intent、Handler、BroadCast在Fragment，activity,Service，线程之间传递消息，优点是开销小，代码更优雅，以及将发送者和接收者解耦。
+  四种ThreadMode:
+  1.POSTING:订阅方法将和发送着执行在同一线程，默认的值，订阅方法不适合做耗时操作。
+  2.MAIN：订阅方法执行在主线程，用于更新UI，不适合执行耗时操作
+  3.BACKGROUND：订阅方法执行在单一的一个线程，不适合执行耗时操作，一个接着一个调用，不能处理并发。如果当前非UI线程，则直接调用，如果是UI线程，则将任务加入到后台的一个队列，最终由EventBus的一个线程池去调用。
+  4.ASYNC：新开一个子线程执行任务，但是动态控制并发。
+
+7.View绘制机制
+  OnMeasure测量视图，onLayout确定View位置进行布局，onDraw负责绘制布局。
+  Invalidata和postInvalidate区别：
+  如果当前视图是可见的，onDraw会在未来的某个时刻调用，这个方法必须在UI主线程中调用，此时用invalidate，如果不是在主线程需要调用postInvalidate。
+8.事件分发机制
+  本质：将点击事件向某个View进行传递并最终得到处理。
+  主要方法：diapatchTounchEvent(),分发点击事件；onInterceptTounchEvent()，判断是否拦截了某个事件；onTouchEvent()，处理点击事件。
+  事件分发顺序：Activity(Window)-ViewGroup-View
+9.Android中进程的级别，以及各自的区别。
+  前台进程：用户当前正在做的事情需要这个进程。
+  可见进程：不拥有运行与前台的组件，但是依然能影响用户所见。
+  服务进程：service。
+  后台进程：如activity进入onStop方法。
+  空进程：保留这类进程的唯一理由是高速缓存。
+10.内存泄漏
+  1.资源对象没有关闭
+  2.构造Adapter时没有使用缓存的convertView
+  3.Bitmap对象在不使用时应该调用recycle()释放缓存
+  4.试着使用关于application的context来替代和activity相关的context；
+  5.注册没取消造成内存泄漏
+  6.集合中对象没清理造成的内存泄漏。
+  查找内存泄漏工具Android Profile，LeadCanary
+11.布局优化
+  1.优化布局层级，使用ConstrantLayout
+  2.重用布局，使用merge，include，ViewStub。
+12.View和SurficeView的区别
+  View主要适用于主动更新的情况下，而SurficeView主要用于被动更新，例如频繁的刷新；
+  View的主线程创建中对画面进行刷新，而SurficeView通常会通过一个子线程来进行页面的刷新；
+  View在绘制时没有使用双缓冲机制，而SurficeView在底层实现机制中就已经实现了双缓冲机制。
+13.组件化和插件化
+  组件化：将app分成多个模块，每一个模块都是一个组件，减少项目编译时间，解耦。
+  插件化：宿主和插件分开编译，并发开发，动态更新插件(热修复)，按需下载模块。
+  最大区别：组件化在运动时不具备动态添加和修改组件的功能，但是插件化可以。
+14.常用的线程池
+  FixThreadPool:只有核心线程，并且数量固定，也不会被回收，所有线程都活动时，因为队列没有大小限制，新任务会等待执行，优点：更快的响应外界请求。
+  SingleThreadPool：只有一个核心线程，确保所有的任务都在同一线程按顺序完成，因此不需要处理线程同步问题。
+  CachedThreadPool：只有非核心线程，最大线程数非常大，所有线程都活动时，会为       新任务创建新线程，否则会利用空闲线程处理任务。
+  优点：任何任务都会被立即执行，比较适合执行大量的耗时较少的任务。
+  ScheduledThreadPool：核心线程数固定，非核心线程数没有限制。优点：执行定时任务以及有固定周期的重复任务。
+15.AlarmManger和Timer区别
+  Timer：是Java封装的一个类，内部封装了Thread 和TimerTask,这个队列按照一定的方式将任务排列处理。当CPU进入休眠状态时，thread会失效，导致定时任务失效。可以用WakeLock让CPU保持唤醒状态，但是会增加手机耗电量。
+  AlarmManger:是android系统封装用于管理RTC的模块。可以在CPU休眠时正常运行，在预设的时间到达时，通过中断唤醒CPU。这就意味着，如果我们用AlarmManger来定时执行任务时，CPU可以正常的休眠，只有在需要运行任务时醒来一段很短的时间。
+16.MD5加密
+  MessageDiget获取MD5摘要算法，使用指定的字节更新摘要，然后获取密文，将密文转换成十六进制的字符串形式。
+15.ListView优化
+  使用ViewHolder模式来提高效率
+  复用convertView
+  分段加载，分页加载
+  使用recycleView。
+16.Android动画
+  属性动画：包括补间动画。
+  帧动画：一张张单独的图片连贯播放。
+  补间动画：补间动画可以分为四种形式。分别是alpha(淡入淡出),translate(位移)，scale(缩放大小),rolate(旋转)。
+17.PopupWindow和Dialog有什么区别
+  两者的最根本区别在于有没有新建一个window,PopupWindow没有新建，而是将view加到DecoreView,Dialog是新建了一个Window，相当于走了一遍Activity中创建的流程。
+
+18.Android屏幕适配
+  dp（dip）：px = dp * 密度比，都是Density Independent Pixels的缩写，即密度无关像素
+  dpi：开方（宽度平方 + 高度平方） / 手机的尺寸；dpi是屏幕像素密度，假如一英寸里面有160个像素，这个屏幕的像素密度就是160dpi
+  sp： 可以根据文字大小首选项进行放缩，是设置字体大小的御用单位。
+  px： 像素，px是比较熟悉，前面的分辨率就是用的像素为单位，大多数情况下，比如UI设计、Android原生API都会以px作为统一的计量单位，像素是获取屏幕宽高等。
+  问题： dp和px如何换算呢
+  px = density * dp;
+  density = dpi / 160;
+  px = dp * (dpi / 160);
+
+  宽高限定适配(穷举)；
+  smallestWidth适配(dp,屏幕可用宽度和高度的最小尺寸的dp值)
+  长(1080px,宽720px,尺寸8inch)
+
+数据结构大O表示法
+算法                          时间复杂度大O表示法
+线性查找                      O(N)
+二分查找                      O(logN)
+无序数组插入                  O(1)
+有序数组插入                  O(N)
+无需数组删除                  O(N)
+有序数组的删除                O(N)
+
+ 空间复杂度：对一个算法的运行过程中临时暂用存储大小的度量，
+
+ 当一个算法的空间复杂度为一个常量时，即不随被处理数据量n的大小而改变；
+ 当算法的空间复杂度以2为底的n的对数成正比时，可表示为O(log2n)，
+ 当算法的空间复杂度与n成线性比例关系时，可表示为O(n)；
+
+对象存储位置
+  寄存器：最快的存储区，处理器外部，数量有限，根据需求进行分配，不能直接控制。
+  堆栈：位于通用ARM，仅次于寄存器，java系统必须知道 存储在堆栈内所有项的确切生命周期，以便上下移动堆栈指针,java对象并不存储在其中。
+  堆；通用的内存池，用于存储java对象，相对于栈的好处是不需要知道数据在堆的存活时间，因此在堆里分配存储有很大的灵活性，用堆进行存储分配和清理可能比用栈分配存储需要更多时间。
+  常量存储：常量只通常直接存放在程序代码内部。
+  非RAM存储：数据完全存活于程序之外，它可以不受程序的任何控制，在程序没有运行时也可以存在。例子：持久化对象。
+  通常树有三种遍历方法：
+1.前序遍历：先访问根节点，在访问左子节点。结果：10，6，4，8，14，12，16
+2.中序遍历：先访问左子节点，在访问根节点。结果：4，6，8，10，12，14，16
+3.后序遍历：先访问左子节点，在访问右子节点。结果：4，8，6，12，16，14，10
+宽度优先遍历：先访问树的第一层节点，在第二层…。结果10，6，14，4，8，12，16。
+
+Android消息机制要点
+使用场景：在子线程中进行耗时操作，然后完成后在UI中做一些改变
+机制原理：Android的消息机制主要是指Handler的运行机制，Handler的运行需要底层的MessageQuene和Looper的支撑.
+          MessageQuene是消息队列，内部采用单链表的数据结构来存储消息列表，以队列的形式对外提供插入和删除的工作
+          Looper可以理解为消息循环，它会以无线循环的形式去查找队列中是否有新消息，如果有的话就处理，否则一直等待。
+          ThreadLocal的作用是可以在每个线程中存储数据。Handler通过ThreadLocal来获取到当前线程的Looper.
+注意：线程是默认没有Looper的，如果需要使用Handler就必须为线程创建Looper.
+      我们经常提到的主线程，他就是ActivityThread，它在创建时就会初始化Looper,这也是在主线程中默认可以使用Handler的原因。
+
+
+
+
+
+
+Android消息机制分析
+ThreadLocal工作原理
+ThreadLocal是一个线程内部的数据存储类，通过它可以在指定的线程中存储数据，数据存储后，
+           只有在指定线程中可以获取到存储的数据，其他线程则无法获取到数据。
+           另外一个使用场景是复杂逻辑下的对象传递
+ThreadLocal是一个泛型类，主要理解get和set方法，
+set主要用于来存储localValues值
+get主要用于取出当前线程的localValues对象
+消息队列工作原理
+实际上它是通过一个单链表的数据结构来维护消息队列，单链表在插入和删除上比较有优势。
+Looper的工作原理
+Looper在Android的消息机制中扮演这消息循环的角色，具体来说就是它会不停地从MessageQuene中查看是否有新消息，
+如果有就会立刻处理，否则就一直阻塞在那里
+Looper中提供了quit和quitSafely来退出一个Looper,
+二者的主要区别是quit会直接退出Looer,而quitSafely只是设定一个退出标记。
+然后把消息队列中已有的消息处理完毕后才会安全地退出。
+Handler的工作原理
+Handler的工作主要包含消息的发送和接收过程。
+消息的发送可以通过post的一系列方法以及send的一系列方法来实现。
+通过将消息发送到MessageQuene中， 然后经过Looper.loop()从中取出消息，然后在发送到相应的Handler做处理。
+
+扩展：主线程中的Looper.loop()一直无线循环为什么不会造成ANR
+ANR的原因一般有两种：
+   1.当前的事件没有机会处理
+   2.当前的事件正在处理，但没有及时完成
+ActivityThread是主线程入口的类，主要是做消息循环，一旦退出消息循环，那么应用也就退出了
+Android是由事件驅動的，looper.loop()不断地接收时间，处理事件，Activity的生命周期都是运行在Looper.loop()
+的控制下，如果它停止了应用也就停止了。只能是某一个消息或者对消息的处理注册了looper.loop(),而不是Looper.loop()组设了它。
+looper.loop()方法可能会引起主线程的阻塞，但只要它的消息循环没有被阻塞，能一直处理事件就不会产生ANR异常。

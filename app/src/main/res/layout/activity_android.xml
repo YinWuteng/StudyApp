@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:text="android基础知识"
-    />
+    <Button
+        android:id="@+id/btn_android_base"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_margin="@dimen/dp_5"
+        android:gravity="center_vertical"
+        android:text="Android基础知识"
+        android:textSize="@dimen/sp_20"
+        />
+    <Button
+        android:id="@+id/btn_android_code_source"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_margin="@dimen/dp_5"
+        android:layout_below="@+id/btn_android_base"
+        android:gravity="center_vertical"
+        android:text="Android源码相关分析"
+        android:textSize="@dimen/sp_20"
+        />
+    <Button
+        android:id="@+id/btn_android_other"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_margin="@dimen/dp_5"
+        android:layout_below="@+id/btn_android_code_source"
+        android:gravity="center_vertical"
+        android:text="Android其他知识"
+        android:textSize="@dimen/sp_20"
+        />
 </RelativeLayout>

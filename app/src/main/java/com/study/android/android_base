@@ -1,0 +1,94 @@
+1.四大组件是什么
+  Activity，Service，BroadcastReceiver、ContentProvider
+2.四大组件的生命周期和简单用法
+  Activity:一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监控并处理用户的操作，Activity之间通过intent进行通信，需要在AndroidManifest中注册才能使用。
+        生命周期：onCreate--onStart--onResume-onPause-onStop-onRestart/onDestroy
+
+  Service: 以startService启动，以stopService结束。以onBindService启动，unBindService释放。方法会多次触发onStart方法，
+  StartService启动服务，调用者与服务是没有关联的，即使调用者退出，服务依然存在，而onBindService是将调用者与服务绑定，一旦调用者退出，服务也跟着退出。
+  BroadcastReceive广播接收器，生命周期只有十秒左右，如果在onReceive内做超过十秒内的事情，就会报ANR错误。广播需要在AndroidMinifest中注册（静态注册），动态注册广播有一个特点，就是当注册的Activity关闭后，广播也就失效了，
+  ContentProvider使一个应用程序的指定数据集提供给其他应用程序，这些数据可以存储在文件系统中的、在一个SQLite数据库、或以其他合理的方式，其他应用可以通过ContentResolver类从该内容提供者中回去或存入数据。重写其中的增删改查等方法。需要在AndroidMinifest中注册，
+
+  四大组件均需要注册才能使用，Activity、Service、Contentprovider需要在AndroidManifest中注册，而广播可以静态注册，也可以动态注册。
+
+3.横竖屏切换的时候，Activity 各种情况下的生命周期
+  刚启动Activity的时候:onCreate->onStart->onResume
+  切换屏幕状态后
+  onPause->onSaveInstance->onStop->onDestroy->onCreate->onStart->onRestoreInstance->onResume
+  若设置android:configChanges属性后，生命后期不发生变化
+
+4.Fragment生命周期
+onAttache- onCreate->onCreateView->onActivityCreated ->onStart->
+onPause->onStop- onDestroyView->onDestroy->onDisAttach
+
+5.两个Activity之间跳转时必然会执行的是那几个方法
+ActivityA首先执行onPause,ActivityB执行onCreate->onStart->onResume 然后ActivityA执行onStop.
+
+6.Activity的四种启动模式对比
+  Standard:默认配置，在这种模式下，Activity可以有多个实例，也允许多个activity叠加
+  SingleTop：当处于栈顶时就不去重新创建新的activity，而是复用activity
+  SingleTask：堆栈中存在activity时就会复用
+  SingleInstance:开启一个新的任务栈，任务栈里面只有一个activity的实例存在，如果这个activity被开启，把这个任务栈放在前面，如果开启了新的别的activity，别的activity所在的任务栈会放在前面。
+7.fragment之间传递数据的方式
+  1.在MainFragment中设置一个setData()方法，在方法中设置需要更改的值，
+  在第二个Fragment中初始化MainFragment并获取setData方法。
+  2.采用接口回调的方式获取数据
+  3.使用EventBus,该框架时一款针对Android优化的发布/订阅事件总线。主要功能时替代intent，Handler,BroadCast在Fragment,Activity,Service，线程之间传递消息。在Activity中注册事件
+8.service和activity如何怎么进行数据交互
+  1.通过广播进行交互
+  2.通过共享文件
+  3.Messenger
+  4.AIDL
+9.Service的开启方式及生命周期
+  1.startService->stopService
+  onCreate->onStartCommand->onDestroy
+2.bingServiceunBindService
+  onCreate->onBind->onUnbind->onDestroy
+10.谈谈你对ContentProvider的理解
+  ContentProvider是允许不同应用间进行数据及提供的标准的API，	ContentProvider以Uri的形式对外提供数据的访问操作接口，而其它停用则通过ContentResolver根据uri去访问指定的数据。
+11.请描述一下广播BroadcastReceiver的理解
+  四大组件之一，使用的是Binder机制，可应用于同一进程，也可应用于不同进程。
+12.广播的分类
+1.无序广播：
+  优点：完全异步，逻辑上可被任何接受者收到广播，效率高，
+  缺点：接受者不能将处理结果交给下一个接收者，且无法终止广播
+2.有序广播
+ 按被接受者的优先级循序传播，
+  a>b>c，每个都有权终止广播，下一个就得不到
+  每一个都可进行修改操作，下一个就得到上一个修改后的结果。
+13.广播的使用方式和场景
+  1.App全局监听，通过静态注册。主要用于全局监听三方推送消息和接收通知。在AndroidManifest中注册
+  2.组件局部监听，动态注册，context.registerReceiver(receiver,filter)
+14.本地广播和全局广播区别
+  本地广播是用来在同一个应用内的不同组件间发送Broadcast的；
+  主要有如下好处：
+  1.发送的广播只会在自己APP内传播，不会泄露给其它APP，确保隐私数据不会泄漏
+  2.其它APP也无法向你的APP发送该广播。不用担心其他APP会来搞破坏
+  3.比系统全局广播更高效
+15.AlertDialog,popupWindow主要区别
+  AlertDialog是非阻塞线程的，AlertDialog弹出时，后台还可以做其它事情
+  PopupWindow是阻塞线程的，PopupWindow弹出时，程序等待。退出后才向下执行。
+16.Application 和 Activity 的 Context 对象的区别
+  Application的context和Actiivty中的生命周期不同，一个是在整个程序摧毁时，它才会销毁，一个是当前activity摧毁时，它就销毁。凡是跟ui相关的，都用activity作为context来处理。
+17.Android属性动画特性
+  在Android3.0之后才加入。
+  可以自定义动画的以下属性：
+  时长、事件插值、重复次数、动画集、帧频率。
+18.谈谈回调的理解
+  简单理解为：A发送消息给B，B处理完后告诉A处理结果。在Android中不必等待。
+19.介绍下SurfaceView
+  SurfaceView与普通的View的区别就是View视图必须在当前UI线程中进行，SurficeView的绘图由SurfaceHolder来完成，SurfaceHolder会启动新的线程去更新SurfaceView的绘制，不会阻塞ui线程.surfaceCreated,surfaceChanged,surfaceDestroyed.
+
+20.RecyclerView和ListView对比
+  ListView继承重写BaseAdapter类，自定义ViewHolder并判断convertView是否为空的，可以设置头部和底部布局。布局只有纵向效果.
+  RecycleView可以设置多种布局.RecycleView相比 ListView多两级缓存。封装好了ViewHolder。RecycleView提供了用于更新单个itemView的刷新。
+
+21.序列化的作用，以及Android两种序列化的区别
+  在Android中需要传递对象时需要序列化，。序列化的目的是将java对象编成字节流的形式传出去或者从一个字节流中恢复成一个java对象。
+  我们需要对象持久化到存储设备或者通过网络传输给其他客户端，这个时候也需要使用Serializable来完成对象的序列化。
+22.Android数据存储方式
+ 1.使用SP存储
+ 2.文件存储
+ 3.SQL存储
+ 4.使用ContentProvicer存储
+ 5.网络存储
