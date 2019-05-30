@@ -44,5 +44,14 @@
             android:text="多线程、线程池"
             android:textSize="@dimen/sp_20"
             />
+        <Button
+            android:id="@+id/btn_project_design"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_margin="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:text="设计模式"
+            android:textSize="@dimen/sp_20"
+            />
     </LinearLayout>
 </ScrollView>

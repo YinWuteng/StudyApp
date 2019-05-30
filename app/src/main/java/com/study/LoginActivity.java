@@ -28,7 +28,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button btnLogin;
     private ProgressBar login_progress_bar;
     @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
+    private  Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
