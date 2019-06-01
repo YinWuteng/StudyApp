@@ -2,9 +2,7 @@ package com.study;
 
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
@@ -16,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.study.base.BaseActivity;
+import com.study.util.SharedPreferenceUtils;
 import com.study.util.ToastUtils;
 
 /**
@@ -28,7 +27,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button btnLogin;
     private ProgressBar login_progress_bar;
     @SuppressLint("HandlerLeak")
-    private  Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
@@ -38,6 +37,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     };
 
+    private Boolean isLogin=false;
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -55,14 +55,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void findId() {
 
+        isLogin= SharedPreferenceUtils.getInstance().getLoginState();
+        if (isLogin) {
+            login();
+        }
+
+
         TextInputLayout tx_user_hint = findViewById(R.id.tx_user_hint);
         TextInputLayout tx_password_hin = findViewById(R.id.tx_password_hint);
         ed_user = findViewById(R.id.ed_user);
         ed_password = findViewById(R.id.ed_password);
         ed_user.setText("YinWuTeng");
         ed_password.setText("ywt@19930409");
-
-        getUserInfo();
         tx_user_hint.setHint(getResources().getString(R.string.user));
         tx_password_hin.setHint(getResources().getString(R.string.password));
 
@@ -95,36 +99,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (null == user || null == password) {
             ToastUtils.showToast(this, getResources().getString(R.string.user_or_password_null));
         } else {
-            login(user, password);
+            checkLogin(user, password);
         }
     }
 
-    private void login(String user, String password) {
+    private void checkLogin(String user, String password) {
         if (user.equals("YinWuTeng") && password.equals("ywt@19930409")) {
-            saveData(user, password);
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            SharedPreferenceUtils.getInstance().saveLoginInfo(user, password, true);
+            login();
         } else {
             ToastUtils.showToast(LoginActivity.this, getResources().getString(R.string.user_or_password_error));
         }
     }
 
-    private void saveData(String user, String password) {
-        SharedPreferences preferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("user", user);
-        editor.putString("password", password);
-        editor.putBoolean("isLogin", true);
-        editor.apply();
-    }
-
-    private void getUserInfo() {
-        SharedPreferences preferences = getSharedPreferences("user_info", Context.MODE_PRIVATE);
-        boolean isLogin = preferences.getBoolean("isLogin", false);
-        if (isLogin) {
-            ed_user.setText(preferences.getString("user", "user"));
-            ed_password.setText(preferences.getString("password", "password"));
-        }
+    private void login() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        LoginActivity.this.finish();
     }
 
     @Override

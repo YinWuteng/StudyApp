@@ -4,20 +4,25 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.study.util.SharedPreferenceUtils;
+
 public class MyApplication extends Application {
+
+    private static MyApplication instance;
+    public MyApplication(){}
+    public static MyApplication getInstance(){
+        if (instance==null){
+            instance=new MyApplication();
+        }
+        return instance;
+    }
     @Override
     public void onCreate() {
         super.onCreate();
-        createInfo();
+        instance=this;
+        SharedPreferenceUtils sharedPreferenceUtils=new SharedPreferenceUtils();
+        sharedPreferenceUtils.saveLoginInfo("","",false);
     }
 
-    private void createInfo(){
-        SharedPreferences preferences=getSharedPreferences("user_info", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=preferences.edit();
-        editor.putString("user","");
-        editor.putString("password","");
-        //是否登录过
-        editor.putBoolean("isLogin",false);
-        editor.apply();
-    }
+
 }
