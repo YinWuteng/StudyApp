@@ -1,8 +1,7 @@
 package com.study;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
+
 
 import com.study.util.SharedPreferenceUtils;
 
