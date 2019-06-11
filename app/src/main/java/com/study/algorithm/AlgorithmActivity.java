@@ -23,6 +23,10 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SortSimple.java",
            //归并排序
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MergeApp.java",
+           //二分查找
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryCheck.java",
+           //旋转数组查找最小数字
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RoateArray.java",
            //二维数组查找
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TwoArrayCheck.java",
            //替换空格
@@ -38,7 +42,11 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
            //动态规划
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/CutRope.java",
            //斐波拉切数列
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/Fibonacci.java"
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/Fibonacci.java",
+           //矩阵中的路径
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MatrixRoute.java",
+           //机器人的运动范围
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RobotRuningZone.java"
    };
     @Override
     protected int getLayoutId() {
@@ -51,6 +59,8 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
         webLabelUrls.add("单例模式常用写法");
         webLabelUrls.add("冒泡，插入，选择，快排");
         webLabelUrls.add("归并排序");
+        webLabelUrls.add("二分查找");
+        webLabelUrls.add("旋转数组查找最小值");
         webLabelUrls.add("二维数组查找");
         webLabelUrls.add("替换空格");
         webLabelUrls.add("从尾到头打印链表");
@@ -59,6 +69,8 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
         webLabelUrls.add("树的遍历");
         webLabelUrls.add("动态规划");
         webLabelUrls.add("斐波拉切数列");
+        webLabelUrls.add("矩阵中的路径");
+        webLabelUrls.add("机器人的运动范围");
         RecyclerView rvAlgorithm=findViewById(R.id.rv_algorithm);
         AlgorithmAdapter algorithmAdapter = new AlgorithmAdapter(this, webLabelUrls);
         //设置layoutManger为LinearLayoutManger
