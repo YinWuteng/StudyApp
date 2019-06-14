@@ -46,7 +46,15 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
            //矩阵中的路径
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MatrixRoute.java",
            //机器人的运动范围
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RobotRuningZone.java"
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RobotRuningZone.java",
+           //1到n位最大十进数的数值。
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/Print1ToN.java",
+           //O(1)时间内删除链表节点
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DeleteLinkNode.java",
+           //删除倒数第k个节点
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DeleteKLinkNode.java",
+           //调整数组顺序，使奇数位于前面，偶数位于后面
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/AdjustmentArray.java"
    };
     @Override
     protected int getLayoutId() {
@@ -71,6 +79,10 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
         webLabelUrls.add("斐波拉切数列");
         webLabelUrls.add("矩阵中的路径");
         webLabelUrls.add("机器人的运动范围");
+        webLabelUrls.add("1到n位最大十进数的数值");
+        webLabelUrls.add("O(1)时间内删除链表节点");
+        webLabelUrls.add("删除倒数第k个节点");
+        webLabelUrls.add("调整数组顺序，使奇数位于前面，偶数位于后面");
         RecyclerView rvAlgorithm=findViewById(R.id.rv_algorithm);
         AlgorithmAdapter algorithmAdapter = new AlgorithmAdapter(this, webLabelUrls);
         //设置layoutManger为LinearLayoutManger
