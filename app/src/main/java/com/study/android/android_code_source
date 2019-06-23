@@ -62,6 +62,16 @@
    OnMeasure测量视图，onLayout确定View位置进行布局，onDraw负责绘制布局。
    Invalidata和postInvalidate区别：
    如果当前视图是可见的，onDraw会在未来的某个时刻调用，这个方法必须在UI主线程中调用，此时用invalidate，如果不是在主线程需要调用postInvalidate。
+   大多数View要么是在onDraw中画点东西和在onTouchEvent中处理触摸事件
+   自定义View步骤：onMeasure可以不重写，不重写的画就要在外面指定宽高
+               onDraw看情况重写，如果需要画东西就要重写
+               onTouchEvent，如果要做能与手指交互的View就重写
+   注意事项：构造方法中的属性资源回收、onDraw和onTouchEvent避免创建对象，过多操作可能会造成卡顿
+
+   自定义ViewGroup步骤:onMeasure必须重写，在这里测量每一个子View，还有处理自己的尺寸
+                       onLayout，在这里对子View进行布局
+                       如果有自己的触摸事件，需要重写onInterceptTouchEvent或onTouchEvent
+
 13.事件分发机制
    本质：将点击事件向某个View进行传递并最终得到处理。
    主要方法：diapatchTounchEvent(),分发点击事件；onInterceptTounchEvent()，判断是否拦截了某个事件；onTouchEvent()，处理点击事件。

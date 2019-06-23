@@ -54,7 +54,21 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
            //删除倒数第k个节点
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DeleteKLinkNode.java",
            //调整数组顺序，使奇数位于前面，偶数位于后面
-            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/AdjustmentArray.java"
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/AdjustmentArray.java",
+           //树的子结构
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ChildBinaryTreeNote.java",
+           //镜像二叉树
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MinorBinaryTree.java",
+           //对称二叉树
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SymmetryTree.java",
+           //找到栈的最小元素的min函数
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ContainMinStack.java",
+           //栈的压入和弹出顺序
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/StakPushAndPopOrder.java",
+           //从上到下打印二叉树
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/PrintTreeFromTopToBottom.java",
+
+
    };
     @Override
     protected int getLayoutId() {
@@ -83,6 +97,12 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
         webLabelUrls.add("O(1)时间内删除链表节点");
         webLabelUrls.add("删除倒数第k个节点");
         webLabelUrls.add("调整数组顺序，使奇数位于前面，偶数位于后面");
+        webLabelUrls.add("树的子结构");
+        webLabelUrls.add("镜像二叉树");
+        webLabelUrls.add("对称二叉树");
+        webLabelUrls.add("找到栈的最小元素的min函数");
+        webLabelUrls.add("栈的压入和弹出顺序");
+        webLabelUrls.add("从上到下打印二叉树");
         RecyclerView rvAlgorithm=findViewById(R.id.rv_algorithm);
         AlgorithmAdapter algorithmAdapter = new AlgorithmAdapter(this, webLabelUrls);
         //设置layoutManger为LinearLayoutManger
