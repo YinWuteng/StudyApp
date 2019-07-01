@@ -67,8 +67,22 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/StakPushAndPopOrder.java",
            //从上到下打印二叉树
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/PrintTreeFromTopToBottom.java",
-
-
+           //二叉搜索树的后序遍历序列
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeLastSearch.java",
+           //二叉树中和为某一值得路径
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeResultRoot.java",
+           //字符串的排列
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/CharsSort.java",
+           //数组中出现次数超过一半的数字
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/NumberAppearHalfTimes.java",
+           //最小的k个数
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SmallestKNumbers.java",
+           //数据流的中位数
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DatasCenterNumber.java",
+           //1到n出现1的次数
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TimesOf1Show.java",
+           //把数组排成最小的数
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SortDatasSmallestNumber.java"
    };
     @Override
     protected int getLayoutId() {
@@ -103,12 +117,21 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
         webLabelUrls.add("找到栈的最小元素的min函数");
         webLabelUrls.add("栈的压入和弹出顺序");
         webLabelUrls.add("从上到下打印二叉树");
+        webLabelUrls.add("二叉搜索树的后序遍历序列");
+        webLabelUrls.add("二叉树中和为某一值得路径");
+        webLabelUrls.add("字符串的排列");
+        webLabelUrls.add("数组中出现次数超过一半的数字");
+        webLabelUrls.add("最小的k个数");
+        webLabelUrls.add("数据流的中位数");
+        webLabelUrls.add("1到n出现1的次数");
+        webLabelUrls.add("把数组排成最小的数");
         RecyclerView rvAlgorithm=findViewById(R.id.rv_algorithm);
         AlgorithmAdapter algorithmAdapter = new AlgorithmAdapter(this, webLabelUrls);
         //设置layoutManger为LinearLayoutManger
         algorithmAdapter.setOnItemClickListener(this);
         rvAlgorithm.setLayoutManager(new LinearLayoutManager(this));
         rvAlgorithm.setAdapter(algorithmAdapter);
+
 
     }
 
