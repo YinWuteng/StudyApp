@@ -13,8 +13,6 @@ import com.study.base.BaseActivity;
  */
 public class KotlinActivity extends BaseActivity implements View.OnClickListener {
 
-    private Button btnKtBase;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_kotlin;
@@ -22,7 +20,7 @@ public class KotlinActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void findId() {
-        btnKtBase = findViewById(R.id.btn_kt_base);
+        Button btnKtBase = findViewById(R.id.btn_kt_base);
         btnKtBase.setOnClickListener(this);
     }
 
@@ -32,7 +30,7 @@ public class KotlinActivity extends BaseActivity implements View.OnClickListener
             case R.id.btn_kt_base:
                 Intent intent = new Intent();
                 intent.setClass(this, AlgorithmWebActivity.class);
-                intent.putExtra("url", "https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/java/kt_base");
+                intent.putExtra("url", "https://github.com/YinWuteng/StudyApp/blob/master/app/src/main/java/com/study/kotlin/kt_base");
                 startActivity(intent);
                 break;
         }
