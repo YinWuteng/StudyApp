@@ -82,7 +82,22 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
            //1到n出现1的次数
            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TimesOf1Show.java",
            //把数组排成最小的数
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SortDatasSmallestNumber.java"
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SortDatasSmallestNumber.java",
+           //礼物的最大值
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/GiftLargestResults.java",
+           //最长不包含重复字符的子字符串
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/LargestNotContainSubString.java",
+           //丑数
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/UglyNumber.java",
+           //第一次只出现一次的字符
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/FirstShowOnceString.java",
+           //数字在排序数字中出现的次数
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/NumberShowInDatas.java",
+           //两个链表的第一个公共节点
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TwoLinkedListFirstCommonNode.java",
+           //二叉搜索树的第k大节点
+           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeKLargestNode.java"
+
    };
     @Override
     protected int getLayoutId() {
@@ -125,6 +140,13 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
         webLabelUrls.add("数据流的中位数");
         webLabelUrls.add("1到n出现1的次数");
         webLabelUrls.add("把数组排成最小的数");
+        webLabelUrls.add("礼物的最大值");
+        webLabelUrls.add("最长不包含重复字符的子字符串");
+        webLabelUrls.add("丑数");
+        webLabelUrls.add("第一次只出现一次的字符");
+        webLabelUrls.add("数字在排序数字中出现的次数");
+        webLabelUrls.add("两个链表的第一个公共节点");
+        webLabelUrls.add("二叉搜索树的第k大节点");
         RecyclerView rvAlgorithm=findViewById(R.id.rv_algorithm);
         AlgorithmAdapter algorithmAdapter = new AlgorithmAdapter(this, webLabelUrls);
         //设置layoutManger为LinearLayoutManger
