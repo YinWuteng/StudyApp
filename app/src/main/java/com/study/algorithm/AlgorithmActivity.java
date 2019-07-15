@@ -14,91 +14,106 @@ import java.util.List;
 /**
  * 算法
  */
-public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.OnItemClickListener{
-   private List<String> webLabelUrls=new ArrayList<>();
-   private String[]   webUrls={
-           //单例模式常用写法
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SingleTon.java",
-           //冒泡，插入，选择，快排
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SortSimple.java",
-           //归并排序
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MergeApp.java",
-           //二分查找
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryCheck.java",
-           //旋转数组查找最小数字
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RoateArray.java",
-           //二维数组查找
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TwoArrayCheck.java",
-           //替换空格
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ReplaceSpace.java",
-           //从尾到头打印链表
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/PrintListNode.java",
-           //重建二叉树
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RebuildBinaryTree.java",
-           //获取重复数字
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DuplicateNum.java",
-           //树的遍历
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TreeTraversal.java",
-           //动态规划
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/CutRope.java",
-           //斐波拉切数列
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/Fibonacci.java",
-           //矩阵中的路径
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MatrixRoute.java",
-           //机器人的运动范围
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RobotRuningZone.java",
-           //1到n位最大十进数的数值。
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/Print1ToN.java",
-           //O(1)时间内删除链表节点
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DeleteLinkNode.java",
-           //删除倒数第k个节点
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DeleteKLinkNode.java",
-           //调整数组顺序，使奇数位于前面，偶数位于后面
+public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.OnItemClickListener {
+    private List<String> webLabelUrls = new ArrayList<>();
+    private String[] webUrls = {
+            //单例模式常用写法
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SingleTon.java",
+            //冒泡，插入，选择，快排
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SortSimple.java",
+            //归并排序
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MergeApp.java",
+            //二分查找
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryCheck.java",
+            //旋转数组查找最小数字
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RoateArray.java",
+            //二维数组查找
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TwoArrayCheck.java",
+            //替换空格
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ReplaceSpace.java",
+            //从尾到头打印链表
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/PrintListNode.java",
+            //重建二叉树
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RebuildBinaryTree.java",
+            //获取重复数字
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DuplicateNum.java",
+            //树的遍历
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TreeTraversal.java",
+            //动态规划
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/CutRope.java",
+            //斐波拉切数列
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/Fibonacci.java",
+            //矩阵中的路径
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MatrixRoute.java",
+            //机器人的运动范围
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/RobotRuningZone.java",
+            //1到n位最大十进数的数值。
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/Print1ToN.java",
+            //O(1)时间内删除链表节点
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DeleteLinkNode.java",
+            //删除倒数第k个节点
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DeleteKLinkNode.java",
+            //调整数组顺序，使奇数位于前面，偶数位于后面
             "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/AdjustmentArray.java",
-           //树的子结构
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ChildBinaryTreeNote.java",
-           //镜像二叉树
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MinorBinaryTree.java",
-           //对称二叉树
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SymmetryTree.java",
-           //找到栈的最小元素的min函数
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ContainMinStack.java",
-           //栈的压入和弹出顺序
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/StakPushAndPopOrder.java",
-           //从上到下打印二叉树
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/PrintTreeFromTopToBottom.java",
-           //二叉搜索树的后序遍历序列
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeLastSearch.java",
-           //二叉树中和为某一值得路径
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeResultRoot.java",
-           //字符串的排列
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/CharsSort.java",
-           //数组中出现次数超过一半的数字
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/NumberAppearHalfTimes.java",
-           //最小的k个数
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SmallestKNumbers.java",
-           //数据流的中位数
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DatasCenterNumber.java",
-           //1到n出现1的次数
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TimesOf1Show.java",
-           //把数组排成最小的数
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SortDatasSmallestNumber.java",
-           //礼物的最大值
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/GiftLargestResults.java",
-           //最长不包含重复字符的子字符串
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/LargestNotContainSubString.java",
-           //丑数
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/UglyNumber.java",
-           //第一次只出现一次的字符
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/FirstShowOnceString.java",
-           //数字在排序数字中出现的次数
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/NumberShowInDatas.java",
-           //两个链表的第一个公共节点
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TwoLinkedListFirstCommonNode.java",
-           //二叉搜索树的第k大节点
-           "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeKLargestNode.java"
+            //树的子结构
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ChildBinaryTreeNote.java",
+            //镜像二叉树
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MinorBinaryTree.java",
+            //对称二叉树
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SymmetryTree.java",
+            //找到栈的最小元素的min函数
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ContainMinStack.java",
+            //栈的压入和弹出顺序
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/StakPushAndPopOrder.java",
+            //从上到下打印二叉树
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/PrintTreeFromTopToBottom.java",
+            //二叉搜索树的后序遍历序列
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeLastSearch.java",
+            //二叉树中和为某一值得路径
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeResultRoot.java",
+            //字符串的排列
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/CharsSort.java",
+            //数组中出现次数超过一半的数字
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/NumberAppearHalfTimes.java",
+            //最小的k个数
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SmallestKNumbers.java",
+            //数据流的中位数
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/DatasCenterNumber.java",
+            //1到n出现1的次数
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TimesOf1Show.java",
+            //把数组排成最小的数
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/SortDatasSmallestNumber.java",
+            //礼物的最大值
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/GiftLargestResults.java",
+            //最长不包含重复字符的子字符串
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/LargestNotContainSubString.java",
+            //丑数
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/UglyNumber.java",
+            //第一次只出现一次的字符
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/FirstShowOnceString.java",
+            //数字在排序数字中出现的次数
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/NumberShowInDatas.java",
+            //两个链表的第一个公共节点
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TwoLinkedListFirstCommonNode.java",
+            //二叉搜索树的第k大节点
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeKLargestNode.java",
+            //二叉树的深度
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/BinaryTreeOfDeep.java",
+            //和为s的数字
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/TwoNumberResultIsS.java",
+            //和为s的连续正数序列
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/ContinueNumbersIsS.java",
+            //滑动窗口队列的最大值
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MaxNumberInDequne.java",
+            //扑克牌中的顺子
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/IsContinuous.java",
+            //约瑟夫环
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/Josephuse.java",
+            //股票的最大利润
+            "https://github.com/YinWuteng/JavaAlgorithm/blob/master/src/MaxDiff.java"
 
-   };
+    };
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_arithmetic;
@@ -147,7 +162,14 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
         webLabelUrls.add("数字在排序数字中出现的次数");
         webLabelUrls.add("两个链表的第一个公共节点");
         webLabelUrls.add("二叉搜索树的第k大节点");
-        RecyclerView rvAlgorithm=findViewById(R.id.rv_algorithm);
+        webLabelUrls.add("二叉树的深度");
+        webLabelUrls.add("和为s的数字");
+        webLabelUrls.add("和为s的连续正数序列");
+        webLabelUrls.add("滑动窗口队列的最大值");
+        webLabelUrls.add("扑克牌中的顺子");
+        webLabelUrls.add("约瑟夫环");
+        webLabelUrls.add("股票的最大利润");
+        RecyclerView rvAlgorithm = findViewById(R.id.rv_algorithm);
         AlgorithmAdapter algorithmAdapter = new AlgorithmAdapter(this, webLabelUrls);
         //设置layoutManger为LinearLayoutManger
         algorithmAdapter.setOnItemClickListener(this);
@@ -159,11 +181,11 @@ public class AlgorithmActivity extends BaseActivity implements AlgorithmAdapter.
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent intent=new Intent();
-        switch (view.getId()){
+        Intent intent = new Intent();
+        switch (view.getId()) {
             case R.id.tv_web_url:
-                intent.setClass(this,AlgorithmWebActivity.class);
-                intent.putExtra("url",webUrls[position]);
+                intent.setClass(this, AlgorithmWebActivity.class);
+                intent.putExtra("url", webUrls[position]);
                 startActivity(intent);
                 break;
         }
